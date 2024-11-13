@@ -3,10 +3,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const modal = document.getElementById('productModal');
     const carousel = document.getElementById('carousel');
     const closeBtn = document.querySelector('.close-btn');
-    let currentItemIndex = 0; // Índice do item de produto
-    let carouselIndex = 0; // Índice do carrossel de imagens
+    let currentItemIndex = 0; 
+    let carouselIndex = 0; 
 
-    // Função para abrir o modal com as imagens do produto
+    // abrir o modal com as imagens do produto <3 
     items.forEach(item => {
         item.addEventListener('click', () => {
             const productId = item.getAttribute('data-product');
@@ -14,15 +14,15 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Função para abrir o modal
+    // : para abrir o modal =3 
     function openModal(productId) {
-        // Limpar o carrossel atual
+        // <3  Limpar o carrossel atual <3
         carousel.innerHTML = '';
 
-        // Obter as imagens do produto selecionado
+        // <3 Obter as imagens do produto selecionado <3
         const images = getProductImages(productId);
 
-        // Adicionar imagens ao carrossel
+        // <3 <3 Adicionar imagens ao carrossel <3 <3 
         images.forEach(image => {
             const imgElement = document.createElement('img');
             imgElement.src = image;
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         showImage(carouselIndex);
     }
 
-    // Função para obter imagens do produto
+    //  obter imagens do produto
     function getProductImages(productId) {
         const images = {
             julieteazul: [
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return images[productId] || [];
     }
 
-    // Função para exibir a imagem do carrossel
+    // para exibir a imagem do carrossel
     function showImage(index) {
         const images = document.querySelectorAll('#carousel img');
         images.forEach((img, i) => {
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Função para mover o carrossel
+    //  para mover o carrossel
     function moveCarousel(direction) {
         const images = document.querySelectorAll('#carousel img');
         carouselIndex = (carouselIndex + direction + images.length) % images.length;
@@ -67,17 +67,17 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector('.next').addEventListener('click', () => moveCarousel(1));
     document.querySelector('.prev').addEventListener('click', () => moveCarousel(-1));
 
-    // Função para fechar o modal
+    //  para fechar o modal
     closeBtn.addEventListener('click', () => {
         modal.style.display = 'none';
     });
 
-    // Inicialização: garante que apenas o primeiro item de cada carrossel seja exibido
+    // Inicialização: AKI O primeiro item de cada carrossel É exibido
     items.forEach((item, index) => {
         item.style.display = index === 0 ? 'block' : 'none';
     });
 
-    // Função para adicionar ao carrinho
+    //  para adicionar NO CARRINHO =3 
     const images = document.querySelectorAll('.carousel img');
     let currentImageIndex = 0;
 
@@ -97,13 +97,13 @@ document.addEventListener("DOMContentLoaded", function () {
         showImageCarousel(currentImageIndex);
     });
 
-    // Mostrar a primeira imagem inicialmente
+    // AQUI Mostra a primeira imagem inicialmente
     showImageCarousel(currentImageIndex);
 
     // Adicionar ao carrinho
     document.getElementById('addToCart').addEventListener('click', function () {
         const productName = document.querySelector('.produto-info h2').textContent;
         alert(productName + ' foi adicionado ao carrinho!');
-        // Lógica para adicionar ao carrinho
+        
     });
 });

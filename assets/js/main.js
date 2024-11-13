@@ -3,10 +3,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const modal = document.getElementById('productModal');
     const carousel = document.getElementById('carousel');
     const closeBtn = document.querySelector('.close-btn');
-    let currentItemIndex = 0; // Índice do item de produto
-    let carouselIndex = 0; // Índice do carrossel de imagens
+    let currentItemIndex = 0; 
+    let carouselIndex = 0; 
 
-    // Função para abrir o modal com as imagens do produto
+    // para abrir o modal com as imagens do produto
     items.forEach(item => {
         item.addEventListener('click', () => {
             const productId = item.getAttribute('data-product');
@@ -14,15 +14,15 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Função para abrir o modal
+    // para abrir o modal
     function openModal(productId) {
-        // Limpar o carrossel atual
+        // Limpa  o carrossel atual (mas nao sei se ta funfa)
         carousel.innerHTML = '';
 
-        // Obter as imagens do produto selecionado
+        // imagens do produto selecionado
         const images = getProductImages(productId);
 
-        // Adicionar imagens ao carrossel
+       
         images.forEach(image => {
             const imgElement = document.createElement('img');
             imgElement.src = image;
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         showImage(carouselIndex);
     }
 
-    // Função para obter imagens do produto
+    //para obter imagens do produto
     function getProductImages(productId) {
         const images = {
             julieteazul: [
@@ -43,12 +43,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 'assets/images/julieteazul2.jpg',
                 'assets/images/julieteazul3.jpg'
             ],
-            // Você pode adicionar outros produtos aqui, se necessário
+            
         };
         return images[productId] || [];
     }
 
-    // Função para exibir a imagem do carrossel
+    // <3 exibir a imagem do carrossel <3 
     function showImage(index) {
         const images = document.querySelectorAll('#carousel img');
         images.forEach((img, i) => {
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Função para mover o carrossel
+    // <3 para mover o carrossel <3
     function moveCarousel(direction) {
         const images = document.querySelectorAll('#carousel img');
         carouselIndex = (carouselIndex + direction + images.length) % images.length;
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector('.next').addEventListener('click', () => moveCarousel(1));
     document.querySelector('.prev').addEventListener('click', () => moveCarousel(-1));
 
-    // Função para fechar o modal
+    // para fechar o modal
     closeBtn.addEventListener('click', () => {
         modal.style.display = 'none';
     });
