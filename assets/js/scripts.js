@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 'assets/images/julieteazul2.jpg',
                 'assets/images/julieteazul3.jpg'
             ],
-            // Você pode adicionar outros produtos aqui, se necessário
+            
         };
         return images[productId] || [];
     }
