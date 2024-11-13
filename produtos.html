@@ -1,0 +1,195 @@
+<!DOCTYPE html> 
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos - Lully Chan</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="loaded">
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="produtos.html">Produtos</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="produtos">
+        <h1>Produtos Disponíveis</h1>
+
+        <!-- Categoria de Óculos de Sol -->
+        <div class="categoria">
+            <h2>Óculos de Sol</h2>
+            <div class="categoria-itens">
+                <div class="produto-item" data-product="julieteazul">
+                    <img src="assets/images/julieteazul.jpg" alt="Óculos Juliete Azul">
+                    <h3>Juliete Azul</h3>
+                    <p>R$ 70</p>
+                </div>
+                <div class="produto-item" data-product="julieteraibown">
+                    <img src="assets/images/julieteraibown.jpg" alt="Óculos Juliete Raibown">
+                    <h3>Juliete Raibown</h3>
+                    <p>R$ 65</p>
+                </div>
+                <div class="produto-item" data-product="julieterosa">
+                    <img src="assets/images/julieterosa.jpg" alt="Óculos Juliete Rosa">
+                    <h3>Juliete Rosa</h3>
+                    <p>R$ 60</p>
+                </div>
+                <div class="produto-item" data-product="julietevermelha">
+                    <img src="assets/images/julietevermelha.jpg" alt="Óculos Juliete Vermelha">
+                    <h3>Juliete Vermelha</h3>
+                    <p>R$ 75</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categoria de Jaquetas -->
+        <div class="categoria">
+            <h2>Jaquetas</h2>
+            <div class="categoria-itens">
+                <div class="produto-item" data-product="jaquetabmw">
+                    <img src="assets/images/jaquetabmw.jpg" alt="Jaqueta BMW">
+                    <h3>Jaqueta BMW</h3>
+                    <p>R$ 150</p>
+                </div>
+                <div class="produto-item" data-product="jaquetaferrari">
+                    <img src="assets/images/jaquetaferrari.jpg" alt="Jaqueta Ferrari">
+                    <h3>Jaqueta Ferrari</h3>
+                    <p>R$ 170</p>
+                </div>
+                <div class="produto-item" data-product="jaquetamercedes">
+                    <img src="assets/images/jaquetamercedes.jpg" alt="Jaqueta Mercedes">
+                    <h3>Jaqueta Mercedes</h3>
+                    <p>R$ 160</p>
+                </div>
+                <div class="produto-item" data-product="jaquetaporsche">
+                    <img src="assets/images/jaquetaporsche.jpg" alt="Jaqueta Porsche">
+                    <h3>Jaqueta Porsche</h3>
+                    <p>R$ 180</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal para o Carrossel e Adicionar ao Carrinho -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="carousel" class="carousel"></div>
+            <div class="carousel-controls">
+                <button class="prev" onclick="moveCarousel(-1)">&#10094;</button>
+                <button class="next" onclick="moveCarousel(1)">&#10095;</button>
+            </div>
+            <button id="addToCart">Adicionar ao Carrinho</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = document.getElementById('productModal');
+            const closeBtn = document.querySelector('.close-btn');
+            const carousel = document.getElementById('carousel');
+            const addToCartBtn = document.getElementById('addToCart');
+            let currentIndex = 0;
+            let selectedProduct = '';
+
+            // Dados dos produtos com suas imagens
+            // Dados dos produtos com suas imagens
+const productImages = {
+    "julieteazul": [
+        "assets/images/julieteazul.jpg",
+        "assets/images/julieteazul2.jpg",
+        "assets/images/julieteazul3.jpg"
+    ],
+    "julieteraibown": [
+        "assets/images/julieteraibown.jpg",
+        "assets/images/julieteraibown2.jpg",
+        "assets/images/julieteraibown3.jpg"  // Adicionada a vírgula após o segundo item
+    ],
+    "julieterosa": [
+        "assets/images/julieterosa.jpg",
+        "assets/images/julieterosa2.jpg"
+    ],
+    "julietevermelha": [
+        "assets/images/julietevermelha.jpg",
+        "assets/images/julietevermelha2.jpg"
+    ],
+    "jaquetabmw": [
+        "assets/images/jaquetabmw.jpg",
+        "assets/images/jaquetabmw2.jpg"
+    ],
+    "jaquetaferrari": [
+        "assets/images/jaquetaferrari.jpg",
+        "assets/images/jaquetaferrari2.jpg",
+        "assets/images/jaquetaferrari3.jpg"  // Adicionada a vírgula após o segundo item
+    ],
+    "jaquetamercedes": [
+        "assets/images/jaquetamercedes.jpg",
+        "assets/images/jaquetamercedes2.jpg",
+        "assets/images/jaquetamercedes3.jpg"  // Adicionada a vírgula após o segundo item
+    ],
+    "jaquetaporsche": [
+        "assets/images/jaquetaporsche.jpg",
+        "assets/images/jaquetaporsche2.jpg",
+        "assets/images/jaquetaporsche3.jpg"  // Adicionada a vírgula após o segundo item
+    ]
+};
+
+
+            // Abrir modal com o carrossel ao clicar no produto
+            document.querySelectorAll('.produto-item').forEach(item => {
+                item.addEventListener('click', function () {
+                    selectedProduct = this.getAttribute('data-product');
+                    if (productImages[selectedProduct]) {
+                        // Limpar e carregar imagens no carrossel
+                        carousel.innerHTML = '';
+                        productImages[selectedProduct].forEach(image => {
+                            const imgElement = document.createElement('img');
+                            imgElement.src = image;
+                            imgElement.alt = `Imagem de ${selectedProduct}`;
+                            carousel.appendChild(imgElement);
+                        });
+                        modal.style.display = 'block';
+                        currentIndex = 0;
+                        updateCarousel();
+                    }
+                });
+            });
+
+            // Fechar o modal
+            closeBtn.addEventListener('click', function () {
+                modal.style.display = 'none';
+            });
+
+            // Navegação do carrossel
+            document.querySelector('.next').addEventListener('click', function () {
+                currentIndex = (currentIndex + 1) % productImages[selectedProduct].length;
+                updateCarousel();
+            });
+
+            document.querySelector('.prev').addEventListener('click', function () {
+                currentIndex = (currentIndex - 1 + productImages[selectedProduct].length) % productImages[selectedProduct].length;
+                updateCarousel();
+            });
+
+            // Atualizar o carrossel
+            function updateCarousel() {
+                const images = carousel.getElementsByTagName('img');
+                Array.from(images).forEach((img, index) => {
+                    img.style.display = (index === currentIndex) ? 'block' : 'none';
+                });
+            }
+
+            // Adicionar ao carrinho
+            addToCartBtn.addEventListener('click', function () {
+                alert(`Produto ${selectedProduct} foi adicionado ao carrinho!`);
+            });
+        });
+    </script>
+</body>
+</html>
