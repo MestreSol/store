@@ -21,7 +21,7 @@
     <section class="produtos">
         <h1>Produtos Disponíveis</h1>
 
-        <!-- Categoria de Óculos de Sol -->
+        <!-- Categoria de Óculos de Sol Pike Malokas irra -->
         <div class="categoria">
             <h2>Óculos de Sol</h2>
             <div class="categoria-itens">
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <!-- Categoria de Jaquetas -->
+        <!-- Categoria de Jaquetas fodas i pikas amoh <3  -->
         <div class="categoria">
             <h2>Jaquetas</h2>
             <div class="categoria-itens">
@@ -76,7 +76,8 @@
         </div>
     </section>
 
-    <!-- Modal para o Carrossel e Adicionar ao Carrinho -->
+    <!-- <3 Carrossel e Adicionar ao Carrinho <3 -->
+
     <div id="productModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
@@ -98,8 +99,7 @@
             let currentIndex = 0;
             let selectedProduct = '';
 
-            // Dados dos produtos com suas imagens
-            // Dados dos produtos com suas imagens
+            
 const productImages = {
     "julieteazul": [
         "assets/images/julieteazul.jpg",
@@ -109,7 +109,7 @@ const productImages = {
     "julieteraibown": [
         "assets/images/julieteraibown.jpg",
         "assets/images/julieteraibown2.jpg",
-        "assets/images/julieteraibown3.jpg"  // Adicionada a vírgula após o segundo item
+        "assets/images/julieteraibown3.jpg"  
     ],
     "julieterosa": [
         "assets/images/julieterosa.jpg",
@@ -126,17 +126,17 @@ const productImages = {
     "jaquetaferrari": [
         "assets/images/jaquetaferrari.jpg",
         "assets/images/jaquetaferrari2.jpg",
-        "assets/images/jaquetaferrari3.jpg"  // Adicionada a vírgula após o segundo item
+        "assets/images/jaquetaferrari3.jpg"  
     ],
     "jaquetamercedes": [
         "assets/images/jaquetamercedes.jpg",
         "assets/images/jaquetamercedes2.jpg",
-        "assets/images/jaquetamercedes3.jpg"  // Adicionada a vírgula após o segundo item
+        "assets/images/jaquetamercedes3.jpg"  
     ],
     "jaquetaporsche": [
         "assets/images/jaquetaporsche.jpg",
         "assets/images/jaquetaporsche2.jpg",
-        "assets/images/jaquetaporsche3.jpg"  // Adicionada a vírgula após o segundo item
+        "assets/images/jaquetaporsche3.jpg"  
     ]
 };
 
@@ -161,12 +161,12 @@ const productImages = {
                 });
             });
 
-            // Fechar o modal
+            // Fechar modal
             closeBtn.addEventListener('click', function () {
                 modal.style.display = 'none';
             });
 
-            // Navegação do carrossel
+            // Navegação do carrossel do SBT Mariajokina
             document.querySelector('.next').addEventListener('click', function () {
                 currentIndex = (currentIndex + 1) % productImages[selectedProduct].length;
                 updateCarousel();
@@ -177,7 +177,7 @@ const productImages = {
                 updateCarousel();
             });
 
-            // Atualizar o carrossel
+            // AKI VOCE ATUALIZA o carrossel
             function updateCarousel() {
                 const images = carousel.getElementsByTagName('img');
                 Array.from(images).forEach((img, index) => {
@@ -185,7 +185,7 @@ const productImages = {
                 });
             }
 
-            // Adicionar ao carrinho
+            // aki voce ADD NO CARRINHO 
             addToCartBtn.addEventListener('click', function () {
                 alert(`Produto ${selectedProduct} foi adicionado ao carrinho!`);
             });
