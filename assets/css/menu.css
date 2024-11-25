@@ -1,0 +1,52 @@
+/* Container styles */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* Brand text styles */
+.text_brand {
+    margin-left: 1rem;
+    font-family: "Love Light", cursive;
+    font-size: 1.5rem;
+}
+
+/* Menu styles */
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #333;
+    color: white;
+}
+
+.menu .brand-area a {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+}
+
+.menu ul {
+    display: flex;
+    list-style: none;
+}
+
+.menu ul li {
+    margin-right: 1rem;
+}
+
+.menu ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.menu ul li a:hover {
+    text-decoration: underline;
+}
+
+.menu ul li a.active {
+    font-weight: bold;
+}

@@ -5,21 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lully Chan</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/menu.css">
+    <link href="https://fonts.googleapis.com/css2?family=Love+Light&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body class="loaded">
-    <!-- Cabeçalho PAGINA HOME -->
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="sobre.html">Sobre</a></li> 
-                <li><a href="produtos.html">Produtos</a></li>
-                <li><a href="contato.html">Contato</a></li>
-            </ul>
-        </nav>
-    </header>
-
     <!--  Banner -->
     <section class="hero">
         <div class="banner-container">
@@ -33,7 +23,26 @@
             </div>
         </div>
     </section>
-
+    <header>
+        <nav class="menu">
+            <div class="brand-area">
+                <a href="index.html">
+                    <img src="assets/images/logo.jpg" alt="Lully Chan Store">
+                    <span class="text_brand">Lully Chan Store</span>
+                </a>
+            </div>
+            <div class="search_area">
+                <input type="text" placeholder="Buscar produtos">
+                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li class="dropable"><a href="produtos.html" class="active">Produtos</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
     <!-- Rodapé -->
     <footer>
         <p>&copy; 2024 Lully Chan - Todos os direitos reservados.</p>
