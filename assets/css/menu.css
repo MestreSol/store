@@ -50,3 +50,46 @@
 .menu ul li a.active {
     font-weight: bold;
 }
+
+.search_area input {
+    padding: 0.5rem;
+    border: none;
+    border-bottom: solid 1px #f1f1f1;
+    width: 30vw;
+    margin-right: 1rem;
+    background-color: transparent;
+    text-align: center;
+}
+
+.search_area input::placeholder {
+    text-align: center;
+    color: #ccc;
+}
+
+.search_area input:focus {
+    outline: none;
+}
+
+.search_area input:focus::placeholder {
+    color: transparent;
+}
+
+.search_area input:focus+button {
+    background-color: #555;
+}
+
+.search_area button {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: none;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+}
+
+/* Brand area styles */
+.brand-area img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}

@@ -5,29 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lully Chan</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/glitEffect.css">
     <link rel="stylesheet" href="assets/css/menu.css">
+    <link rel="stylesheet" href="assets/css/text-wrapper-effect.css">
     <link href="https://fonts.googleapis.com/css2?family=Love+Light&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .carousel{
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-inner{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: transform 1s;
+        }
+
+        .carousel-item{
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+        .carousel-item.active{
+            display: block;
+        }
+        .carousel-item img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-control-prev, .carousel-control-next{
+            width: 5%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.059);
+            position: absolute;
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.5s;
+        }
+
+        .carousel-control-prev:hover, .carousel-control-next:hover{
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .carousel-control-prev{
+            left: 0;
+        }
+
+        .carousel-control-next{
+            right: 0;
+        }
+
+        .carousel-control-prev-icon, .carousel-control-next-icon{
+            color: #fff;
+            font-size: 2rem;
+            
+        }
+
+        .carousel-control-prev-icon{
+            transform: rotate(180deg);
+        }
+        .carousel-control{
+            color: #fff;
+            font-size: 2rem;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            text-decoration: none;
+            border: none;
+        }
+        .carousel-content-area{
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 
 <body class="loaded">
-    <!--  Banner -->
-    <section class="hero">
-        <div class="banner-container">
-            <div class="banner-item active">
-                <img src="assets/images/foto1.jpg" alt="Foto 1">
-                <div class="banner-text">
-                    <h1>Bem-vindo à loja Lully Chan</h1>
-                    <p>Óculos de Sol e Roupas Exclusivas</p>
-                    <a href="produtos.html" class="btn">Ver Produtos</a>
-                </div>
-            </div>
-        </div>
-    </section>
     <header>
         <nav class="menu">
             <div class="brand-area">
                 <a href="index.html">
-                    <img src="assets/images/logo.jpg" alt="Lully Chan Store">
+                    <img src="assets/images/logo.png" alt="Lully Chan Store">
                     <span class="text_brand">Lully Chan Store</span>
                 </a>
             </div>
@@ -36,18 +108,76 @@
                 <button><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="sobre.html">Sobre</a></li>
                 <li class="dropable"><a href="produtos.html" class="active">Produtos</a></li>
                 <li><a href="contato.html">Contato</a></li>
             </ul>
         </nav>
     </header>
-    <!-- Rodapé -->
+    <section class="hero">
+        <div class="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="carousel-content-area">
+                        <p>
+                            Use o cupom <span class="text_brand">LULLYCHAN</span> e ganhe 10% de desconto em sua primeira compra!
+                        </p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/images/banner2.jpg" alt="Banner 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/images/banner3.jpg" alt="Banner 3">
+                </div>
+            </div>
+            <button class="carousel-control-prev carousel-control" onKeyDown="carouselControlPrev.click()">
+                <
+            </button>
+            <button class="carousel-control-next carousel-control" onKeyDown="carouselControlNext.click()">
+                >
+            </button>
+        </div>
+    </div>
+    </section>
     <footer>
         <p>&copy; 2024 Lully Chan - Todos os direitos reservados.</p>
     </footer>
 
-    <script src="assets/js/main.js"></script>
 </body>
+<script>
+    let carousel = document.querySelector('.carousel');
+    let carouselInner = document.querySelector('.carousel-inner');
+    let carouselItems = document.querySelectorAll('.carousel-item');
+    let carouselControlPrev = document.querySelector('.carousel-control-prev');
+    let carouselControlNext = document.querySelector('.carousel-control-next');
+    let activeIndex = 0;
+    let interval = 5000;
+
+    carouselControlNext.addEventListener('click', () => {
+        activeIndex--;
+        if(activeIndex < 0){
+            activeIndex = carouselItems.length - 1;
+        }
+        carouselInner.style.transform = `translateX(-${activeIndex * 100}%)`;
+    });
+
+    carouselControlPrev.addEventListener('click', () => {
+        activeIndex++;
+        if(activeIndex >= carouselItems.length){
+            activeIndex = 0;
+        }
+        carouselInner.style.transform = `translateX(-${activeIndex * 100}%)`;
+    });
+
+    setInterval(() => {
+        activeIndex++;
+        if(activeIndex >= carouselItems.length){
+            activeIndex = 0;
+        }
+        carouselInner.style.transform = `translateX(-${activeIndex * 100}%)`;
+    }, interval);
+
+</script>
 </html>

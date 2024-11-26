@@ -1,83 +1,414 @@
-<!DOCTYPE html> 
+<!-- Me fala dps, quer mecher com banco nesse projeto? Se quizer da pra fazer algo mais funcional.... -->
+
+<!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produtos - Lully Chan</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <title>Produtos - Lully Chan Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Reset default margin, padding, and box-sizing for all elements */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Base styles for the body */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        
+
+        /* Product section styles */
+        .produtos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 1rem;
+            width: 190%;
+        }
+
+        .produtos h1 {
+            text-align: center;
+        }
+
+        .categoria {
+            margin-top: 2rem;
+        }
+
+        .categoria h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .categoria-itens {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .produto-item {
+            width: 23%;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .produto-item img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .produto-item h3 {
+            margin: 0.5rem 0;
+        }
+
+        .produto-item p {
+            font-weight: bold;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        /* Search area styles */
+        .search_area {
+            display: flex;
+            align-items: center;
+        }
+
+        
+
+        /* Categories styles */
+        .categories {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            background-color: #333;
+            color: white;
+        }
+
+        .categories-carrouseu {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+        }
+
+        .categories ul {
+            display: flex;
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .categories ul li {
+            margin-right: 1rem;
+        }
+
+        .categories ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .categories ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .categories-controll button {
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            border: none;
+            background-color: #555;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Breadcrumb styles */
+        .breadcrumb {
+            padding: 1rem;
+            background-color: #f1f1f1;
+            text-align: left;
+            font-size: small;
+        }
+
+        .breadcrumb a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            font-weight: bold;
+        }
+
+        /* Filters styles */
+        .filters {
+            padding: 1rem;
+            background-color: #f1f1f1;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 25%;
+        }
+
+        .filters h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .filters hr {
+            margin-bottom: 1rem;
+        }
+
+        .filter-section .collapsed ul {
+            display: none;
+        }
+
+        .filter-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .filter-section ul {
+            list-style: none;
+        }
+
+        .filter-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .filter-section ul li input {
+            margin-right: 0.5rem;
+        }
+
+        .filter-section ul li label {
+            cursor: pointer;
+        }
+
+        /* Color selector styles */
+        .color-circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+
+        .color-selector li {
+            display: inline-block;
+            margin-right: 1rem;
+        }
+
+        .color-selector li input {
+            margin-right: 0.5rem;
+        }
+
+        /* Shop area styles */
+        .shop-area {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+    <link rel="stylesheet" href="assets/css/menu.css">
+    <link href="https://fonts.googleapis.com/css2?family=Love+Light&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body class="loaded">
     <header>
-        <nav>
+        <nav class="menu">
+            <div class="brand-area">
+                <a href="index.html">
+                    <img src="assets/images/logo.png" alt="Lully Chan Store">
+                    <span class="text_brand">Lully Chan Store</span>
+                </a>
+            </div>
+            <div class="search_area">
+                <input type="text" placeholder="Buscar produtos">
+                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="sobre.html">Sobre</a></li>
-                <li><a href="produtos.html">Produtos</a></li>
+                <li class="dropable"><a href="produtos.html" class="active">Produtos</a></li>
                 <li><a href="contato.html">Contato</a></li>
             </ul>
         </nav>
     </header>
-
-    <section class="produtos">
-        <h1>Produtos Disponíveis</h1>
-
-        <!-- Categoria de Óculos de Sol Pike Malokas irra -->
-        <div class="categoria">
-            <h2>Óculos de Sol</h2>
-            <div class="categoria-itens">
-                <div class="produto-item" data-product="julieteazul">
-                    <img src="assets/images/julieteazul.jpg" alt="Óculos Juliete Azul">
-                    <h3>Juliete Azul</h3>
-                    <p>R$ 70</p>
-                </div>
-                <div class="produto-item" data-product="julieteraibown">
-                    <img src="assets/images/julieteraibown.jpg" alt="Óculos Juliete Raibown">
-                    <h3>Juliete Raibown</h3>
-                    <p>R$ 65</p>
-                </div>
-                <div class="produto-item" data-product="julieterosa">
-                    <img src="assets/images/julieterosa.jpg" alt="Óculos Juliete Rosa">
-                    <h3>Juliete Rosa</h3>
-                    <p>R$ 60</p>
-                </div>
-                <div class="produto-item" data-product="julietevermelha">
-                    <img src="assets/images/julietevermelha.jpg" alt="Óculos Juliete Vermelha">
-                    <h3>Juliete Vermelha</h3>
-                    <p>R$ 75</p>
-                </div>
+    <main>
+        <section>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> > <span>Produtos</span>
             </div>
-        </div>
-
-        <!-- Categoria de Jaquetas fodas i pikas amoh <3  -->
-        <div class="categoria">
-            <h2>Jaquetas</h2>
-            <div class="categoria-itens">
-                <div class="produto-item" data-product="jaquetabmw">
-                    <img src="assets/images/jaquetabmw.jpg" alt="Jaqueta BMW">
-                    <h3>Jaqueta BMW</h3>
-                    <p>R$ 150</p>
+        </section>
+        <section class="shop-area">
+            <section class="filters">
+                <h3>Filtro</h3>
+                <hr>
+                <!-- Filter by Category -->
+                <div class="filter-section">
+                    <h4 id="filter-collapsor-categories">Categoria</h4>
+                    <ul id="filter-categories">
+                        <li><input type="checkbox" name="categoria" id="oculos"> <label for="oculos">Óculos de
+                                Sol</label></li>
+                        <li><input type="checkbox" name="categoria" id="jaquetas"> <label
+                                for="jaquetas">Jaquetas</label></li>
+                        <li><input type="checkbox" name="categoria" id="calcas"> <label for="calcas">Calças</label></li>
+                        <li><input type="checkbox" name="categoria" id="camisetas"> <label
+                                for="camisetas">Camisetas</label></li>
+                        <li><input type="checkbox" name="categoria" id="acessorios"> <label
+                                for="acessorios">Acessórios</label></li>
+                    </ul>
                 </div>
-                <div class="produto-item" data-product="jaquetaferrari">
-                    <img src="assets/images/jaquetaferrari.jpg" alt="Jaqueta Ferrari">
-                    <h3>Jaqueta Ferrari</h3>
-                    <p>R$ 170</p>
+                <!-- Filter by Style -->
+                <div class="filter-section">
+                    <h4 class="filter-collapsor-categories">Estilo</h4>
+                    <ul id="filter-categories">
+                        <li><input type="checkbox" name="estilo" id="moderno"> <label for="moderno">Moderno</label></li>
+                        <li><input type="checkbox" name="estilo" id="classico"> <label for="classico">Clássico</label>
+                        </li>
+                        <li><input type="checkbox" name="estilo" id="esportivo"> <label
+                                for="esportivo">Esportivo</label></li>
+                        <li><input type="checkbox" name="estilo" id="casual"> <label for="casual">Casual</label></li>
+                    </ul>
                 </div>
-                <div class="produto-item" data-product="jaquetamercedes">
-                    <img src="assets/images/jaquetamercedes.jpg" alt="Jaqueta Mercedes">
-                    <h3>Jaqueta Mercedes</h3>
-                    <p>R$ 160</p>
+                <!-- Filter by Color -->
+                <div class="filter-section">
+                    <h4>Cor</h4>
+                    <ul class="color-selector">
+                        <li><input type="checkbox" name="cor" id="preto">
+                            <div class="color-circle" style="background-color: #000;"></div>
+                        </li>
+                        <li><input type="checkbox" name="cor" id="branco">
+                            <div class="color-circle" style="background-color: #fff;"></div>
+                        </li>
+                        <li><input type="checkbox" name="cor" id="azul">
+                            <div class="color-circle" style="background-color: #187900;"></div>
+                        </li>
+                        <li><input type="checkbox" name="cor" id="vermelho">
+                            <div class="color-circle" style="background-color: #790000;"></div>
+                        </li>
+                    </ul>
                 </div>
-                <div class="produto-item" data-product="jaquetaporsche">
-                    <img src="assets/images/jaquetaporsche.jpg" alt="Jaqueta Porsche">
-                    <h3>Jaqueta Porsche</h3>
-                    <p>R$ 180</p>
+                <!-- Filter by Price -->
+                <div class="filter-section">
+                    <h4>Preço</h4>
+                    <ul>
+                        <li><input type="checkbox" name="preco" id="ate50"> <label for="ate50">Até R$ 50</label></li>
+                        <li><input type="checkbox" name="preco" id="ate100"> <label for="ate100">Até R$ 100</label></li>
+                        <li><input type="checkbox" name="preco" id="ate200"> <label for="ate200">Até R$ 200</label></li>
+                        <li><input type="checkbox" name="preco" id="mais200"> <label for="mais200">Mais de R$ 200</label></li>
+                    </ul>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- <3 Carrossel e Adicionar ao Carrinho <3 -->
-
+                <!-- Filter by Size -->
+                <div class="filter-section">
+                    <h4>Tamanho</h4>
+                    <ul>
+                        <li><input type="checkbox" name="tamanho" id="pp"> <label for="pp">PP</label></li>
+                        <li><input type="checkbox" name="tamanho" id="p"> <label for="p">P</label></li>
+                        <li><input type="checkbox" name="tamanho" id="m"> <label for="m">M</label></li>
+                        <li><input type="checkbox" name="tamanho" id="g"> <label for="g">G</label></li>
+                        <li><input type="checkbox" name="tamanho" id="gg"> <label for="gg">GG</label></li>
+                    </ul>
+                </div>
+            </section>
+            <section class="produtos">
+                <h1>Produtos Disponíveis</h1>
+                <!-- Category: Óculos de Sol -->
+                <div class="categoria">
+                    <h2>Óculos de Sol</h2>
+                    <div class="categoria-itens">
+                        <div class="produto-item" data-product="julieteazul">
+                            <img src="assets/images/julieteazul.jpg" alt="Óculos Juliete Azul">
+                            <h3>Juliete Azul</h3>
+                            <p>R$ 70</p>
+                        </div>
+                        <div class="produto-item" data-product="julieteraibown">
+                            <img src="assets/images/julieteraibown.jpg" alt="Óculos Juliete Raibown">
+                            <h3>Juliete Raibown</h3>
+                            <p>R$ 65</p>
+                        </div>
+                        <div class="produto-item" data-product="julieterosa">
+                            <img src="assets/images/julieterosa.jpg" alt="Óculos Juliete Rosa">
+                            <h3>Juliete Rosa</h3>
+                            <p>R$ 60</p>
+                        </div>
+                        <div class="produto-item" data-product="julietevermelha">
+                            <img src="assets/images/julietevermelha.jpg" alt="Óculos Juliete Vermelha">
+                            <h3>Juliete Vermelha</h3>
+                            <p>R$ 75</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Category: Jaquetas -->
+                <div class="categoria">
+                    <h2>Jaquetas</h2>
+                    <div class="categoria-itens">
+                        <div class="produto-item" data-product="jaquetabmw">
+                            <img src="assets/images/jaquetabmw.jpg" alt="Jaqueta BMW">
+                            <h3>Jaqueta BMW</h3>
+                            <p>R$ 150</p>
+                        </div>
+                        <div class="produto-item" data-product="jaquetaferrari">
+                            <img src="assets/images/jaquetaferrari.jpg" alt="Jaqueta Ferrari">
+                            <h3>Jaqueta Ferrari</h3>
+                            <p>R$ 170</p>
+                        </div>
+                        <div class="produto-item" data-product="jaquetamercedes">
+                            <img src="assets/images/jaquetamercedes.jpg" alt="Jaqueta Mercedes">
+                            <h3>Jaqueta Mercedes</h3>
+                            <p>R$ 160</p>
+                        </div>
+                        <div class="produto-item" data-product="jaquetaporsche">
+                            <img src="assets/images/jaquetaporsche.jpg" alt="Jaqueta Porsche">
+                            <h3>Jaqueta Porsche</h3>
+                            <p>R$ 180</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+    <!-- Modal for Product Carousel and Add to Cart -->
     <div id="productModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
@@ -89,107 +420,6 @@
             <button id="addToCart">Adicionar ao Carrinho</button>
         </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const modal = document.getElementById('productModal');
-            const closeBtn = document.querySelector('.close-btn');
-            const carousel = document.getElementById('carousel');
-            const addToCartBtn = document.getElementById('addToCart');
-            let currentIndex = 0;
-            let selectedProduct = '';
-
-            
-const productImages = {
-    "julieteazul": [
-        "assets/images/julieteazul.jpg",
-        "assets/images/julieteazul2.jpg",
-        "assets/images/julieteazul3.jpg"
-    ],
-    "julieteraibown": [
-        "assets/images/julieteraibown.jpg",
-        "assets/images/julieteraibown2.jpg",
-        "assets/images/julieteraibown3.jpg"  
-    ],
-    "julieterosa": [
-        "assets/images/julieterosa.jpg",
-        "assets/images/julieterosa2.jpg"
-    ],
-    "julietevermelha": [
-        "assets/images/julietevermelha.jpg",
-        "assets/images/julietevermelha2.jpg"
-    ],
-    "jaquetabmw": [
-        "assets/images/jaquetabmw.jpg",
-        "assets/images/jaquetabmw2.jpg"
-    ],
-    "jaquetaferrari": [
-        "assets/images/jaquetaferrari.jpg",
-        "assets/images/jaquetaferrari2.jpg",
-        "assets/images/jaquetaferrari3.jpg"  
-    ],
-    "jaquetamercedes": [
-        "assets/images/jaquetamercedes.jpg",
-        "assets/images/jaquetamercedes2.jpg",
-        "assets/images/jaquetamercedes3.jpg"  
-    ],
-    "jaquetaporsche": [
-        "assets/images/jaquetaporsche.jpg",
-        "assets/images/jaquetaporsche2.jpg",
-        "assets/images/jaquetaporsche3.jpg"  
-    ]
-};
-
-
-            // Abrir modal com o carrossel ao clicar no produto
-            document.querySelectorAll('.produto-item').forEach(item => {
-                item.addEventListener('click', function () {
-                    selectedProduct = this.getAttribute('data-product');
-                    if (productImages[selectedProduct]) {
-                        // Limpar e carregar imagens no carrossel
-                        carousel.innerHTML = '';
-                        productImages[selectedProduct].forEach(image => {
-                            const imgElement = document.createElement('img');
-                            imgElement.src = image;
-                            imgElement.alt = `Imagem de ${selectedProduct}`;
-                            carousel.appendChild(imgElement);
-                        });
-                        modal.style.display = 'block';
-                        currentIndex = 0;
-                        updateCarousel();
-                    }
-                });
-            });
-
-            // Fechar modal
-            closeBtn.addEventListener('click', function () {
-                modal.style.display = 'none';
-            });
-
-            // Navegação do carrossel do SBT Mariajokina
-            document.querySelector('.next').addEventListener('click', function () {
-                currentIndex = (currentIndex + 1) % productImages[selectedProduct].length;
-                updateCarousel();
-            });
-
-            document.querySelector('.prev').addEventListener('click', function () {
-                currentIndex = (currentIndex - 1 + productImages[selectedProduct].length) % productImages[selectedProduct].length;
-                updateCarousel();
-            });
-
-            // AKI VOCE ATUALIZA o carrossel
-            function updateCarousel() {
-                const images = carousel.getElementsByTagName('img');
-                Array.from(images).forEach((img, index) => {
-                    img.style.display = (index === currentIndex) ? 'block' : 'none';
-                });
-            }
-
-            // aki voce ADD NO CARRINHO 
-            addToCartBtn.addEventListener('click', function () {
-                alert(`Produto ${selectedProduct} foi adicionado ao carrinho!`);
-            });
-        });
-    </script>
 </body>
+
 </html>
